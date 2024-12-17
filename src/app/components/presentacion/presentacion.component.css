@@ -1,0 +1,320 @@
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin: 0;  /* Asegura que no haya márgenes alrededor */
+}
+
+main {
+  position: fixed;  /* Posiciona el main de forma fija */
+  top: 0;  /* Asegura que no haya espacio en la parte superior */
+  left: 0;  /* Asegura que no haya espacio a la izquierda */
+  width: 100vw;  /* Asegura que ocupe el 100% del ancho de la ventana */
+  height: 100vh;  /* Asegura que ocupe el 100% de la altura de la ventana */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.item {
+  width: 200px;
+  height: 300px;
+  list-style-type: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 30px rgba(255,255,255,0.3) inset;
+  transition: transform 0.1s, left 0.75s, top 0.75s, width 0.75s, height 0.75s;
+
+  &:nth-child(1), &:nth-child(2) {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+  }
+
+  &:nth-child(3) { left: 50%; }
+  &:nth-child(4) { left: calc(50% + 220px); }
+  &:nth-child(5) { left: calc(50% + 440px); }
+  &:nth-child(6) { left: calc(50% + 660px); opacity: 0; }
+}
+
+.content {
+  width: min(30vw,400px);
+  position: absolute;
+  top: 47%;
+  left: 3rem;
+  transform: translateY(-50%);
+  font: 400 0.85rem helvetica,sans-serif;
+  /* color: rgb(250, 250, 250); */
+  color: rgb(253, 253, 253);
+  text-shadow: 1px 1px 3px rgb(3, 3, 3);
+   font-size: 1.5rem;
+  /* text-shadow: 0 3px 8px rgba(0,0,0,0.5); */
+  opacity: 0;
+  display: none;
+
+  & .title {
+    font-family: 'arial-black';
+    text-transform: uppercase;
+  }
+
+  & .description {
+ font-family: 'Raleway', sans-serif;
+
+
+    line-height: 1.7;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* & button {
+    width: fit-content;
+    background-color: rgba(0,0,0,0.1);
+    color: white;
+    border: 2px solid white;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+  } */
+
+
+  .start-button {
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+    background: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+    color: white;
+    border: 2px solid transparent; /* Borde animado reemplaza este */
+    border-radius: 0.25rem;
+    padding: 0.75rem 1.5rem; /* Más padding horizontal */
+    font-size: 1.5rem;
+    text-transform: uppercase; /* Texto en mayúsculas */
+    letter-spacing: 2px; /* Espaciado entre letras */
+    overflow: hidden; /* Para mantener los efectos dentro del botón */
+    cursor: pointer;
+    z-index: 1;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  /* Fondo animado con un ligero movimiento */
+  .start-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
+    z-index: 0;
+    transition: none;
+    animation: background-move 3s linear infinite; /* Movimiento constante del fondo */
+  }
+  
+  /* Efecto de borde brillante animado */
+  .start-button::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+    border-radius: 0.25rem;
+    z-index: 0;
+    animation: border-move 2s linear infinite; /* Movimiento constante del borde */
+    filter: blur(4px); /* Suaviza el brillo */
+    opacity: 0.7; /* Reduce la intensidad del borde */
+  }
+  
+  /* Asegura que el texto e iconos estén por encima */
+  .start-button i, .start-button span {
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Hover: Resalta más el botón */
+  .start-button:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo más claro */
+  }
+  
+  /* Animación del fondo */
+  @keyframes background-move {
+    0% {
+      transform: translate(-10%, -10%);
+    }
+    50% {
+      transform: translate(10%, 10%);
+    }
+    100% {
+      transform: translate(-10%, -10%);
+    }
+  }
+  
+  /* Animación del borde */
+  @keyframes border-move {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  /* Adaptaciones para dispositivos móviles */
+  @media (max-width: 768px) {
+    .start-button {
+      font-size: 0.6rem; /* Tamaño de texto más pequeño */
+      padding: 0.6rem 1rem;
+    }
+  
+    .start-button:hover {
+      transform: scale(1.05); /* Menor escalado en móviles */
+    }
+  }
+  
+}
+
+
+.content .profile-pic {
+  width: 60px; /* Tamaño pequeño de la imagen */
+  height: 60px; /* Asegura que la imagen sea cuadrada */
+  border-radius: 50%; /* Redondea la imagen */
+  object-fit: cover; /* Asegura que la imagen mantenga la proporción */
+  margin-bottom: 1rem; /* Espacio entre la imagen y el título */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 600px) {
+  .content .profile-pic {
+    width: 60px; /* Reducción del tamaño en pantallas más pequeñas */
+    height: 60px;
+  }
+}
+
+@media (min-width: 601px) {
+  .content .profile-pic {
+    width: 90px; /* Aumentar el tamaño en pantallas más grandes */
+    height: 90px;
+  }
+}
+
+
+.item:nth-of-type(2) .content {
+  display: block;
+  animation: show 0.75s ease-in-out 0.3s forwards;
+}
+
+@keyframes show {
+  0% {
+    filter: blur(5px);
+    transform: translateY(calc(-50% + 75px));
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.nav {
+  position: fixed;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  user-select: none;
+
+  & .btn {
+    background-color: rgba(255,255,255,0.5);
+    color: rgba(0,0,0,0.7);
+    border: 2px solid rgba(0,0,0,0.6);
+    margin: 0 0.25rem;
+    padding: 0.75rem;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(255,255,255,0.3);
+    }
+  }
+}
+
+@media (width > 650px) and (width < 900px) {
+  .content {
+    & .title        { font-size: 1.5rem; }
+    & .description  { font-size: 1rem; }
+    /* & button        { font-size: 1.4rem; } */
+  }
+  .item {
+    width: 160px;
+    height: 270px;
+
+    &:nth-child(3) { left: 50%; }
+    &:nth-child(4) { left: calc(50% + 170px); }
+    &:nth-child(5) { left: calc(50% + 340px); }
+    &:nth-child(6) { left: calc(50% + 510px); opacity: 0; }
+  }
+}
+
+@media (width < 650px) {
+  .content {
+    & .title        { font-size: 1.3rem; }
+    & .description  { font-size: 0.9rem; }
+    /* & button        { font-size: 1rem; } */
+  }
+  .item {
+    width: 130px;
+    height: 220px;
+
+    &:nth-child(3) { left: 50%; }
+    &:nth-child(4) { left: calc(50% + 140px); }
+    &:nth-child(5) { left: calc(50% + 280px); }
+    &:nth-child(6) { left: calc(50% + 420px); opacity: 0; }
+  }
+}
+
+
+.social-icons {
+  margin-top: 0.5rem; /* Espacio entre el párrafo y los iconos */
+  text-align: center; /* Centra los iconos */
+}
+
+.social-icons a {
+  margin: 0 10px; /* Espaciado entre los iconos */
+  color: white; /* Color de los iconos */
+  font-size: 1.5rem; /* Tamaño de los iconos */
+  transition: color 0.3s ease; /* Efecto de transición al pasar el mouse */
+}
+
+.social-icons a:hover {
+  color: #1b26f9; /* Color de los iconos cuando el mouse pasa sobre ellos */
+}
+
+.social-icons i {
+  transition: transform 0.3s ease; /* Efecto de transición para animar el tamaño */
+}
+
+.social-icons a:hover i {
+  transform: scale(1.1); /* Hace crecer el icono al pasar el mouse */
+}

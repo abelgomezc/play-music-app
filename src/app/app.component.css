@@ -1,0 +1,8 @@
+
+.content-wrapper {
+    padding-bottom: 60px; /* Ajusta el valor según la altura del footer */
+    min-height: 100vh; /* Asegura que el contenido ocupe al menos la altura de la pantalla */
+    display: flex;
+    flex-direction: column;
+  }
+  

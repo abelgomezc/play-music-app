@@ -1,0 +1,107 @@
+
+ 
+
+<div class="navbar-container">
+  <div class="navbar">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Buscar canciones o artistas..."
+      class="search-input"
+      (focus)="inputFocus = true"
+      (blur)="inputFocus = false"
+    />
+    <button (click)="search()" class="search-button">
+      <i class="fa fa-search"></i>
+    </button>
+  </div>
+</div>
+
+
+
+
+
+<!-- music-container.component.html -->
+
+ 
+
+  <div *ngIf="results.length > 0 && !isLoading" class="music-container">
+  
+    <div class="featured-song">
+  
+      <div class="song-info">
+        <div class="cover-image-container">
+          <div class="cover-image-hole"></div> 
+          <img *ngIf="isPlaying" [src]="selectedSound.coverImage" alt="Cover de la canción" class="cover-image rotating" />
+          <img *ngIf="!isPlaying" [src]="selectedSound.coverImage" alt="Cover de la canción" class="cover-image" />
+        </div>
+        <h2>{{ selectedSound.title }}</h2>
+        <p>{{ selectedSound.artist }}</p>
+        <div class="controls">
+          <!-- <button (click)="previousSong()">Anterior</button>
+          <button (click)="togglePlayPause()">
+            {{ isPlaying ? 'Pausar' : 'Reproducir' }}
+          </button>
+          <button (click)="nextSong()">Siguiente</button> -->
+          <button (click)="previousSong()">
+            <i class="fa fa-backward"></i> <!-- Icono para el botón "Anterior" -->
+          </button>
+          
+          <button (click)="togglePlayPause()">
+            <i class="fa" [ngClass]="isPlaying ? 'fa-pause' : 'fa-play'"></i> <!-- Icono de reproducción o pausa -->
+          </button>
+          
+          <button (click)="nextSong()">
+            <i class="fa fa-forward"></i> <!-- Icono para el botón "Siguiente" -->
+          </button>
+          
+        </div>
+      </div>
+   
+      <!-- Reproductor de audio -->
+      <audio #audioPlayer [src]="selectedSound.audioUrl"    (play)="onPlay()" (pause)="onPause()">
+        Tu navegador no soporta el reproductor de audio.
+      </audio>
+      <div class='music' *ngIf="isPlaying">
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+      </div>
+      
+    </div>
+
+    <div class="cards-container">
+      <div class="card" *ngFor="let song of results" (click)="selectSong(song)">
+        <div class="card-image">
+          <img [src]="song.coverImage" alt="Cover de la canción" />
+        </div>
+        <div class="card-info">
+          <p><strong>{{ song.title }}</strong></p>
+          <p>{{ song.artist }}</p>
+        </div>
+        <div class="music-icon">
+          <i class="fas fa-headphones"></i> <!-- Icono musical -->
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+
+<div *ngIf="isLoading" class="loading-container">
+  <div class="vinyl-spinner">
+    <div class="inner-circle"></div>
+  </div>
+</div>
+<footer class="footer">
+  <p class="educational-note">
+    Este proyecto utiliza la API de Deezer (RapidAPI) únicamente con fines educativos. Todo el contenido mostrado pertenece a Deezer.
+  </p>
+</footer>

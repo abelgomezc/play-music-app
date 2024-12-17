@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #2a3c58; 
+  }
+  ::view-transition-new(root) {
+    animation: fadeInZoomColor 3s ease 0s 1 both;
+    background: inherit; /* Hereda el fondo del body */
+}
+
+::view-transition-old(root) {
+    animation: fadeOutZoomColor 3s ease 0s 1 both;
+    background: inherit;
+}
+
+@keyframes fadeInZoomColor {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+        background: radial-gradient(circle, rgba(50, 90, 150, 1) 0%, rgba(0, 0, 0, 0) 100%);
+        box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.3);
+        color: rgba(255, 255, 255, 0);
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+        color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 40px 20px rgba(255, 255, 255, 0.4);
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+        background: none;
+        color: #f1f1f1;
+        box-shadow: none;
+    }
+}
+
+@keyframes fadeOutZoomColor {
+    from {
+        transform: scale(1);
+        opacity: 1;
+        color: #f1f1f1;
+        background: none;
+        box-shadow: none;
+    }
+    50% {
+        transform: scale(0.9);
+        opacity: 0.5;
+        color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.3);
+    }
+    to {
+        transform: scale(0.6);
+        opacity: 0;
+        color: rgba(255, 255, 255, 0);
+        background: radial-gradient(circle, rgba(50, 90, 150, 1) 0%, rgba(0, 0, 0, 0) 100%);
+        box-shadow: 0 0 50px 10px rgba(255, 255, 255, 0.5);
+    }
+}
